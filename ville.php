@@ -99,97 +99,113 @@ if ($villeNom === '') {
   <meta charset="UTF-8">
   <title>Détail ville - <?= htmlspecialchars($villeNom) ?></title>
   <link rel="stylesheet" href="css/style.css">
-  <!-- On garde utils.js pour charger Config.xml et le header -->
   <script src="js/utils.js" defer></script>
 </head>
 
 <body>
 
+  <!-- HEADER PRINCIPAL (Général du site) -->
   <header class="site-header" id="site-header" style="background-image:url('<?= htmlspecialchars($headerBg) ?>')">
     <h1 id="site-title"><?= htmlspecialchars($siteTitle) ?></h1>
     <h2 id="site-tagline"><?= htmlspecialchars($siteTagline) ?></h2>
   </header>
 
+  <!-- CONTENU VILLE -->
+  <div class="city-page">
 
-  <section class="main">
-    <div class="city-container">
+    <header class="city-header">
+      <h1><?= htmlspecialchars($villeNom) ?></h1>
+      <p>Informations détaillées</p>
+    </header>
 
-      <?php if (isset($error)): ?>
-        <h2>Erreur</h2>
-        <p><?= htmlspecialchars($error) ?></p>
+    <!-- IMAGE PRINCIPALE SI DISPONIBLE -->
+    <?php if (!empty($sites[0]['photo'])): ?>
+      <img class="city-main-image" src="<?= htmlspecialchars($sites[0]['photo']) ?>"
+        alt="<?= htmlspecialchars($villeNom) ?>">
+    <?php endif; ?>
 
-      <?php else: ?>
+    <!-- DESCRIPTIF -->
+    <div class="section-box">
+      <h2>Descriptif</h2>
+      <p><?= nl2br(htmlspecialchars($descriptif)) ?></p>
+    </div>
 
-        <h1 class="city-title"><?= htmlspecialchars($villeNom) ?></h1>
-
-        <h3 class="section-title">Descriptif</h3>
-        <p><?= nl2br(htmlspecialchars($descriptif)) ?></p>
-
-        <?php if ($sites): ?>
-          <h3 class="section-title">Sites à visiter</h3>
+    <!-- SITES -->
+    <?php if ($sites): ?>
+      <div class="section-box">
+        <h2>Sites à visiter</h2>
+        <div class="site-grid">
           <?php foreach ($sites as $s): ?>
-            <div class="site-card">
+            <div class="site-card2">
               <?php if ($s['photo']): ?>
-                <img class="city-image" src="<?= htmlspecialchars($s['photo']) ?>" alt="<?= htmlspecialchars($s['nom']) ?>">
+                <img src="<?= htmlspecialchars($s['photo']) ?>" alt="">
               <?php endif; ?>
-
-              <div>
-                <strong><?= htmlspecialchars($s['nom']) ?></strong>
-              </div>
+              <div><?= htmlspecialchars($s['nom']) ?></div>
             </div>
           <?php endforeach; ?>
-        <?php endif; ?>
+        </div>
+      </div>
+    <?php endif; ?>
 
-        <?php if ($hotels): ?>
-          <h3 class="section-title">Hôtels</h3>
-          <div class="list-block">
-            <ul>
-              <?php foreach ($hotels as $h): ?>
-                <li><?= htmlspecialchars($h) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
+    <!-- HOTELS -->
+    <?php if ($hotels): ?>
+      <div class="section-box">
+        <h2>Hôtels</h2>
+        <ul class="simple-list2">
+          <?php foreach ($hotels as $h): ?>
+            <li><?= htmlspecialchars($h) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 
-        <?php if ($restaurants): ?>
-          <h3 class="section-title">Restaurants</h3>
-          <div class="list-block">
-            <ul>
-              <?php foreach ($restaurants as $h): ?>
-                <li><?= htmlspecialchars($h) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
+    <!-- RESTAURANTS -->
+    <?php if ($restaurants): ?>
+      <div class="section-box">
+        <h2>Restaurants</h2>
+        <ul class="simple-list2">
+          <?php foreach ($restaurants as $h): ?>
+            <li><?= htmlspecialchars($h) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 
-        <?php if ($gares): ?>
-          <h3 class="section-title">Gares</h3>
-          <div class="list-block">
-            <ul>
-              <?php foreach ($gares as $h): ?>
-                <li><?= htmlspecialchars($h) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
+    <!-- GARES -->
+    <?php if ($gares): ?>
+      <div class="section-box">
+        <h2>Gares</h2>
+        <ul class="simple-list2">
+          <?php foreach ($gares as $h): ?>
+            <li><?= htmlspecialchars($h) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 
-        <?php if ($aeroports): ?>
-          <h3 class="section-title">Aéroports</h3>
-          <div class="list-block">
-            <ul>
-              <?php foreach ($aeroports as $h): ?>
-                <li><?= htmlspecialchars($h) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
+    <!-- AEROPORTS -->
+    <?php if ($aeroports): ?>
+      <div class="section-box">
+        <h2>Aéroports</h2>
+        <ul class="simple-list2">
+          <?php foreach ($aeroports as $h): ?>
+            <li><?= htmlspecialchars($h) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
 
-        <a href="index.php" class="back-btn">🏠 Retour à l'accueil</a>
+    <!-- ACTIONS -->
+    <div class="city-actions2">
+      <a href="index.php" class="btn-light2">↩ Retour</a>
 
-      <?php endif; ?>
-
+      <form method="get" action="ville_pdf.php">
+        <input type="hidden" name="nom" value="<?= htmlspecialchars($villeNom) ?>">
+        <button class="btn-primary2">📄 Export PDF</button>
+      </form>
     </div>
-  </section>
+
+  </div>
 
 </body>
 

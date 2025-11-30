@@ -77,12 +77,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $continent = trim($_POST['continent']);
     $descriptif = trim($_POST['descriptif']);
 
-    // textarea → tableaux
-    $sitesLines = array_filter(array_map('trim', explode("\n", $_POST['sites'])));
-    $hotels = array_filter(array_map('trim', explode("\n", $_POST['hotels'])));
-    $restaurants = array_filter(array_map('trim', explode("\n", $_POST['restaurants'])));
-    $gares = array_filter(array_map('trim', explode("\n", $_POST['gares'])));
-    $aeroports = array_filter(array_map('trim', explode("\n", $_POST['aeroports'])));
+    // ==========================
+// Récupérer les SITES depuis les champs tableau
+// ==========================
+    $siteNames = $_POST['site_name'] ?? [];
+    $sitePhotos = $_POST['site_photo'] ?? [];
+
+    $sitesLines = [];
+
+    for ($i = 0; $i < count($siteNames); $i++) {
+        $nom = trim($siteNames[$i]);
+        $photo = isset($sitePhotos[$i]) ? trim($sitePhotos[$i]) : '';
+
+        // Si tout est vide -> on ignore la ligne
+        if ($nom === '' && $photo === '') {
+            continue;
+        }
+
+        // On recompose "nom|photo" pour ta logique existante
+        $sitesLines[] = $nom . '|' . $photo;
+    }
+
+    // ==========================
+// HÔTELS
+// ==========================
+    $hotels = [];
+    if (isset($_POST['hotels_list']) && is_array($_POST['hotels_list'])) {
+        foreach ($_POST['hotels_list'] as $h) {
+            $h = trim($h);
+            if ($h !== '') {
+                $hotels[] = $h;
+            }
+        }
+    }
+
+    // ==========================
+// RESTAURANTS
+// ==========================
+    $restaurants = [];
+    if (isset($_POST['restaurants_list']) && is_array($_POST['restaurants_list'])) {
+        foreach ($_POST['restaurants_list'] as $r) {
+            $r = trim($r);
+            if ($r !== '') {
+                $restaurants[] = $r;
+            }
+        }
+    }
+
+    // ==========================
+// GARES
+// ==========================
+    $gares = [];
+    if (isset($_POST['gares_list']) && is_array($_POST['gares_list'])) {
+        foreach ($_POST['gares_list'] as $g) {
+            $g = trim($g);
+            if ($g !== '') {
+                $gares[] = $g;
+            }
+        }
+    }
+
+    // ==========================
+// AÉROPORTS
+// ==========================
+    $aeroports = [];
+    if (isset($_POST['aeroports_list']) && is_array($_POST['aeroports_list'])) {
+        foreach ($_POST['aeroports_list'] as $a) {
+            $a = trim($a);
+            if ($a !== '') {
+                $aeroports[] = $a;
+            }
+        }
+    }
 
     // ======================================================================
     // 1) Créer le fichier individuel data/Ville.xml
@@ -279,6 +345,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Gestion ville</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+<script>
+function addSite() {
+    let c = document.getElementById("sites-container");
+    let row = document.createElement("div");
+    row.className = "site-row";
+    row.innerHTML = `
+        <input type="text" name="site_name[]" placeholder="Nom du site">
+        <input type="text" name="site_photo[]" placeholder="URL photo">
+        <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+    `;
+    c.appendChild(row);
+}
+
+function addRow(type) {
+    let c = document.getElementById(type + "-container");
+    let row = document.createElement("div");
+    row.className = "simple-row";
+    row.innerHTML = `
+        <input type="text" name="${type}[]" placeholder="${type}">
+        <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+    `;
+    c.appendChild(row);
+}
+</script>
 
 <body>
     <header class="site-header" style="background-image:url('images/header.jpg')">
@@ -297,8 +387,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="post">
 
+                <!-- Ville / Pays / Continent -->
                 <div class="search-grid">
-
                     <div class="input-group">
                         <input class="floating" type="text" name="ville" placeholder=" "
                             value="<?= htmlspecialchars($data['ville']) ?>" required>
@@ -318,57 +408,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
+                <!-- Descriptif -->
                 <div class="input-group">
                     <textarea class="floating" name="descriptif" placeholder=" "
                         required><?= htmlspecialchars($data['descriptif']) ?></textarea>
                     <label>Descriptif</label>
                 </div>
 
-                <div class="search-grid">
 
-                    <div class="input-group">
-                        <textarea class="floating" name="sites" placeholder=" " required><?php
-                        foreach ($data['sites'] as $s)
-                            echo $s['nom'] . "|" . $s['photo'] . "\n";
-                        ?></textarea>
-                        <label>Sites (nom | photo)</label>
+                <!-- --------------------------- -->
+                <!--        SITES DYNAMIQUES      -->
+                <!-- --------------------------- -->
+                <div class="section-box">
+                    <h3>Sites à visiter</h3>
+
+                    <div id="sites-container">
+
+                        <?php if (!empty($data['sites'])): ?>
+                            <?php foreach ($data['sites'] as $s): ?>
+                                <div class="site-row">
+                                    <input type="text" name="site_name[]" placeholder="Nom du site"
+                                        value="<?= htmlspecialchars($s['nom']) ?>">
+                                    <input type="text" name="site_photo[]" placeholder="URL photo"
+                                        value="<?= htmlspecialchars($s['photo']) ?>">
+                                    <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="site-row">
+                                <input type="text" name="site_name[]" placeholder="Nom du site">
+                                <input type="text" name="site_photo[]" placeholder="URL photo">
+                                <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+                            </div>
+                        <?php endif; ?>
+
                     </div>
 
-                    <div class="input-group">
-                        <textarea class="floating" name="hotels" placeholder=" "><?php
-                        foreach ($data['hotels'] as $h)
-                            echo $h . "\n";
-                        ?></textarea>
-                        <label>Hôtels</label>
-                    </div>
-
-                    <div class="input-group">
-                        <textarea class="floating" name="restaurants" placeholder=" "><?php
-                        foreach ($data['restaurants'] as $h)
-                            echo $h . "\n";
-                        ?></textarea>
-                        <label>Restaurants</label>
-                    </div>
-
-                    <div class="input-group">
-                        <textarea class="floating" name="gares" placeholder=" "><?php
-                        foreach ($data['gares'] as $h)
-                            echo $h . "\n";
-                        ?></textarea>
-                        <label>Gares</label>
-                    </div>
-
-                    <div class="input-group">
-                        <textarea class="floating" name="aeroports" placeholder=" "><?php
-                        foreach ($data['aeroports'] as $h)
-                            echo $h . "\n";
-                        ?></textarea>
-                        <label>Aéroports</label>
-                    </div>
-
+                    <button type="button" class="btn-add" onclick="addSite()">➕ Ajouter un site</button>
                 </div>
 
-                <button type="submit">Enregistrer</button>
+
+
+                <!-- --------------------------- -->
+                <!--   HÔTELS / RESTAURANTS ...  -->
+                <!-- --------------------------- -->
+
+                <?php
+                // Fonction d'affichage d'une liste dynamique
+                function renderList($title, $arrayName, $items)
+                {
+                    ?>
+                    <div class="section-box">
+                        <h3><?= $title ?></h3>
+                        <div id="<?= $arrayName ?>-container">
+
+                            <?php if (!empty($items)): ?>
+                                <?php foreach ($items as $i): ?>
+                                    <div class="simple-row">
+                                        <input type="text" name="<?= $arrayName ?>[]" value="<?= htmlspecialchars($i) ?>">
+                                        <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="simple-row">
+                                    <input type="text" name="<?= $arrayName ?>[]" placeholder="<?= $title ?>">
+                                    <button type="button" class="btn-remove" onclick="this.parentNode.remove()">❌</button>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+
+                        <button type="button" class="btn-add" onclick="addRow('<?= $arrayName ?>')">➕ Ajouter</button>
+                    </div>
+                    <?php
+                }
+
+                renderList("Hôtels", "hotels_list", $data['hotels']);
+                renderList("Restaurants", "restaurants_list", $data['restaurants']);
+                renderList("Gares", "gares_list", $data['gares']);
+                renderList("Aéroports", "aeroports_list", $data['aeroports']);
+                ?>
+
+
+                <button type="submit" class="btn">Enregistrer</button>
 
             </form>
 
