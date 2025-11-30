@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ville nom="seoul">
+  <descriptif>capital</descriptif>
+  <sites>
+    <site nom="univ seoul" photo=""/>
+  </sites>
+  <hotels>
+    <hotel>hotel seoul</hotel>
+  </hotels>
+  <restaurants>
+    <restaurant>res seoul</restaurant>
+  </restaurants>
+  <gares>
+    <gare>gare seoul</gare>
+  </gares>
+  <aeroports>
+    <aeroport>ear seoul</aeroport>
+  </aeroports>
+</ville>

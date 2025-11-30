@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "Config.dtd">
+
+<config>
+
+        <title>Explorer le Monde</title>
+        <tagline>Votre guide pour explorer le monde</tagline>
+        <background>images/header.jpg</background>
+
+    <nav>
+        <nom>Douaa</nom>
+        <prenom>MAACHOU</prenom>
+        <specialite>TI</specialite>
+        <section>01</section>
+        <groupe>01</groupe>
+        <mail>maachoudouaa04@gmail.com</mail>
+    </nav>
+</config>

@@ -1,0 +1,299 @@
+/* GENERAL */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #eef2ff, #f9fafc);
+}
+
+/* ANIMATION FADE-IN */
+@keyframes fadeIn {
+  from { opacity: 0.9; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ANIMATION FOR HEADER TITLE */
+@keyframes glow {
+  0% { text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+  50% { text-shadow: 0 0 15px rgba(255,255,255,0.8); }
+  100% { text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+}
+
+/* HEADER */
+header.site-header {
+  color: white;
+  text-align: center;
+  padding: 90px 20px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  animation: fadeIn 1.2s ease-out;
+}
+
+/* Dark gradient overlay */
+header.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.30)
+  );
+}
+
+/* TITLE */
+header.site-header h1 {
+  position: relative;
+  z-index: 2;
+  font-size: 3.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  animation: glow 3s infinite ease-in-out;
+}
+
+/* TAGLINE */
+header.site-header h2 {
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  opacity: 0.95;
+  letter-spacing: 1.5px;
+  animation: fadeIn 1.8s ease-out;
+}
+
+/* LAYOUT */
+.container {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 30px;
+  padding: 30px;
+  animation: fadeIn 1.4s ease-out;
+}
+
+/* SIDEBAR */
+nav.sidebar {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+  transition: transform 0.3s;
+}
+
+nav.sidebar:hover {
+  transform: translateY(-4px);
+}
+
+nav.sidebar h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+/* BUTTON */
+button, .btn {
+  background: linear-gradient(45deg, #4a7af2, #6c5ce7);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+
+/* MAIN SECTION */
+section.main {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  animation: fadeIn 1.6s ease-out;
+}
+
+/* INPUTS */
+/* STANDARD INPUTS (only for non-floating ones) */
+input:not(.floating), select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 12px;
+  background: #f9fafb;
+  transition: 0.3s;
+}
+
+input:not(.floating):focus, select:focus {
+  border-color: #4a7af2;
+  background: white;
+  box-shadow: 0 0 6px rgba(74,122,242,0.3);
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #4a7af2;
+  box-shadow: 0 0 6px rgba(74,122,242,0.3);
+  background: white;
+}
+
+/* RESULTS */
+.results li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eef2ff;
+  transition: 0.3s;
+}
+
+.results li:hover {
+  background: #f3f4ff;
+  padding-left: 8px;
+}
+
+/* CITY LINKS */
+.results a.city-link {
+  text-decoration: none;
+  color: #4a7af2;
+  font-weight: 500;
+}
+
+/* ICONS */
+.icon-buttons span {
+  font-size: 1.3rem;
+  transition: 0.2s;
+}
+
+.icon-buttons span:hover {
+  transform: scale(1.2);
+  color: #6c5ce7;
+}
+
+/* FLOATING INPUTS */
+.input-group {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+
+/* Input field */
+/*jai ajouter loption floating pour donner lanimation a lable et le text feild*/
+.input-group input.floating,
+.input-group textarea.floating {
+  width: 100%;
+  padding: 16px 12px 6px;
+  border-radius: 8px;
+  border: 1.5px solid #d6d8e6;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 1.05rem;
+  outline: none;
+  color: #2e2e3a;
+  transition: 0.25s ease;
+
+}
+
+/* On focus */
+.input-group input.floating:focus,
+.input-group textarea.floating:focus {
+  border-color: #6b62f5;
+  box-shadow: 0 0 8px rgba(108, 92, 231, 0.3);
+  background: white;
+}
+
+/* Label inside the input */
+.input-group label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 1rem;
+  color: #7a7a89;
+  pointer-events: none;
+  font-weight: 400;
+  transition: 0.25s ease;
+  background: white;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+/* Floating on focus */
+.input-group input.floating:focus + label,
+.input-group textarea.floating:focus + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #6c5ce7;
+}
+
+/* Floating when input has text */
+.input-group input.floating:not(:placeholder-shown) + label,
+.input-group textarea.floating:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #4a7af2;
+}
+/* When JS detects that the field has a value */
+.input-group input.filled + label,
+.input-group textarea.filled + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #4a7af2;
+}
+
+/* Hover effect */
+.input-group input.floating:hover,
+.input-group textarea.floating:hover {
+  border-color: #b2b8ff;
+}
+.city-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+.section-title {
+  font-size: 26px;
+  margin-top: 35px;
+  color: #4a7af2;
+  font-weight: 600;
+  padding-left: 14px;
+  border-left: 5px solid #6c5ce7;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+}
+
+.section-title:hover {
+  padding-left: 18px;
+}
+
+.list-block ul {
+  background: linear-gradient(to right, #f6f7ff, #ffffff);
+  padding: 18px;
+  border-radius: 10px;
+  list-style: none;
+  border: 1px solid #ececff;
+}
+
+.list-block li {
+  padding: 10px 6px;
+  border-bottom: 1px solid #e0e3ff;
+  font-size: 1.05rem;
+}
+
+.list-block li:last-child {
+  border-bottom: none;
+}
+section.main > div > * {
+  animation: fadeIn 0.8s ease;
+}

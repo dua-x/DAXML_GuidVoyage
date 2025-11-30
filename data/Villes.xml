@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recherche>
+  <continents>
+    <continent no="1" nom="Afrique"/>
+    <continent no="2" nom="Europe"/>
+  <continent nom="asia" no="3"/>
+</continents>
+
+  <pays no="1" nom="Algérie">
+    <villes>
+      <ville nom="Alger">
+        <sites>
+          <site nom="Casbah" photo="images/casbah.jpg"/>
+          <site nom="Notre-Dame d'Afrique" photo="images/nda.jpg"/>
+        </sites>
+      </ville>
+    </villes>
+  </pays>
+
+  <pays no="2" nom="Tunisie">
+    <villes>
+      
+    </villes>
+  </pays>
+<pays nom="maroco" no="1">
+  <villes>
+    
+  <ville nom="maroco"><sites><site nom="maroco" photo=""/></sites></ville></villes>
+</pays>
+<pays nom="korea" no="3"><villes><ville nom="seoul"><sites><site nom="univ seoul" photo=""/></sites></ville></villes></pays></recherche>

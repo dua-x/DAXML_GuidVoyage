@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ville nom="Alger">
+  <descriptif>Capitale de l'Algérie, située sur la côte méditerranéenne.</descriptif>
+  <sites>
+    <site nom="Casbah" photo="images/casbah.jpg"/>
+    <site nom="Notre-Dame d'Afrique" photo="images/nda.jpg"/>
+  </sites>
+  <hotels>
+    <hotel>Hotel El Aurassi</hotel>
+    <hotel>Sofitel Alger</hotel>
+  </hotels>
+  <restaurants>
+    <restaurant>Le Tantra</restaurant>
+    <restaurant>Chez Abdou</restaurant>
+  </restaurants>
+  <gares>
+    <gare>Gare d'Alger</gare>
+  </gares>
+  <aeroports>
+    <aeroport>Aéroport Houari Boumediene</aeroport>
+  </aeroports>
+</ville>

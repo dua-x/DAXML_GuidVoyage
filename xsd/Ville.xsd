@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ville">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="descriptif" type="xs:string"/>
+        <xs:element name="sites">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="site" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="nom" type="xs:string" use="required"/>
+                  <xs:attribute name="photo" type="xs:string" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="hotels">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="hotel" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="restaurants">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="restaurant" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="gares">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gare" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="aeroports">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="aeroport" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+
+      <xs:attribute name="nom" type="xs:string" use="required"/>
+
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

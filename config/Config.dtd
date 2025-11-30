@@ -1,0 +1,12 @@
+<!ELEMENT config (title,tagline, background, nav)>
+<!ELEMENT nav (nom, prenom, specialite, section, groupe, mail)>
+
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT tagline (#PCDATA)>
+<!ELEMENT background (#PCDATA)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT prenom (#PCDATA)>
+<!ELEMENT specialite (#PCDATA)>
+<!ELEMENT section (#PCDATA)>
+<!ELEMENT groupe (#PCDATA)>
+<!ELEMENT mail (#PCDATA)>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Racine Villes.xml -->
+  <xs:element name="recherche">
+    <xs:complexType>
+      <xs:sequence>
+
+        <!-- Bloc continents -->
+        <xs:element name="continents" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="continent" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="no"  type="xs:integer" use="required"/>
+                  <xs:attribute name="nom" type="xs:string"  use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- 0..n pays -->
+        <xs:element name="pays" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+
+              <!-- Chaque pays contient <villes> -->
+              <xs:element name="villes">
+                <xs:complexType>
+                  <xs:sequence>
+
+                    <!-- 0..n villes -->
+                    <xs:element name="ville" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+
+                          <!-- Chaque ville contient <sites> -->
+                          <xs:element name="sites">
+                            <xs:complexType>
+                              <xs:sequence>
+
+                                <!-- 1..n sites -->
+                                <xs:element name="site" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="nom"   type="xs:string" use="required"/>
+                                    <xs:attribute name="photo" type="xs:string" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+
+                        </xs:sequence>
+
+                        <!-- attribut de ville -->
+                        <xs:attribute name="nom" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:sequence>
+
+            <!-- attributs de pays -->
+            <xs:attribute name="no"  type="xs:integer" use="required"/>
+            <xs:attribute name="nom" type="xs:string"  use="required"/>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

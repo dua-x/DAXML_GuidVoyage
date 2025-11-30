@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ville nom="maroco">
+  <descriptif>maroco</descriptif>
+  <sites>
+    <site nom="maroco" photo=""/>
+  </sites>
+  <hotels>
+    <hotel>maroco</hotel>
+  </hotels>
+  <restaurants>
+    <restaurant>maroco</restaurant>
+  </restaurants>
+  <gares>
+    <gare>maroco</gare>
+  </gares>
+  <aeroports>
+    <aeroport>maroco aer</aeroport>
+  </aeroports>
+</ville>
